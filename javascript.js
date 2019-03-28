@@ -2,20 +2,18 @@ var win = 0;
 var loss = 0;
 var guess = 10;
 var guessArray=[];
-document.onkeyup = userinput;
-function userinput() {
-
-    var letter = document.getElementById("userInput").value;
-    console.log(letter);
-    getRandomLetter(letter);
-
+document.onkeyup = function(event) {
+    var userGuess = event.key;
+    console.log(userGuess);
+    getRandomLetter(userGuess);
 }
-function getRandomLetter(letter) {
+
+function getRandomLetter(userGuess) {
     var alphaArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     var randomLetter = alphaArray[Math.floor(Math.random() * alphaArray.length)];
     console.log(randomLetter);
 
-    if (letter === randomLetter) {
+    if (userGuess === randomLetter) {
          win = win + 1;
         console.log("you win this time" + win);
     }
@@ -24,9 +22,9 @@ function getRandomLetter(letter) {
         console.log("you loss this time" + loss);
 
     }
-    guessArray.push(letter);
+    guessArray.push(userGuess);
     console.log(guessArray);
-    document.getElementById("userInput").value="";
+   // document.getElementById("userInput").value="";
 
     guess--;
     document.getElementById("win").innerHTML = "Wins:"+win;
@@ -36,8 +34,7 @@ function getRandomLetter(letter) {
 
     console.log(guess);
     if (guess < 1) {
-        alert("Game Over!!");
-        return false;
+        document.location.reload();
         }
     }
 
